@@ -123,7 +123,7 @@ class Show extends Component {
   handleChange1 = event => {
     this.setState({ assignee: event.target.value });
   };
-
+  //need to implement a common function for rendering the expansion panels
   render() {
     const issues = this.props.issues ? (
       this.props.issues.length ? (
