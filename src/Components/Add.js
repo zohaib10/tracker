@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { addIssue } from '../actions/addIssueActions';
+
 import { TextField, Button, Paper } from '@material-ui/core';
 
 const styles = {
@@ -32,6 +34,7 @@ class Add extends Component {
         title: e.target.title.value,
         description: e.target.description.value
       },
+
       () => {
         this.props.addIssue(this.state);
       }
@@ -87,9 +90,7 @@ class Add extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addIssue: issue => {
-      dispatch({ type: 'ADD_ISSUE', issue });
-    }
+    addIssue: issue => dispatch(addIssue(issue))
   };
 };
 
