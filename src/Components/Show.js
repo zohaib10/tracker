@@ -47,7 +47,7 @@ class Show extends Component {
     assignee: 'All'
   };
 
-  outputExpansion(issue) {
+  outputExpansion = issue => {
     return (
       <ExpansionPanel id="panel" style={styles.panel} key={issue.title}>
         <ExpansionPanelSummary expandIcon={<ExpandMore />}>
@@ -100,7 +100,7 @@ class Show extends Component {
         </ExpansionPanelDetails>
       </ExpansionPanel>
     );
-  }
+  };
 
   handleClick = title => {
     this.props.deleteIssue(title);
@@ -150,139 +150,13 @@ class Show extends Component {
               this.state.assignee === 'All' &&
               this.state.status.toLowerCase() === issue.status.toLowerCase()
             ) {
-              return (
-                <ExpansionPanel
-                  id="panel"
-                  style={styles.panel}
-                  key={issue.title}
-                >
-                  <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-                    <Typography>
-                      {issue.title} - {issue.status} - {issue.assignee} -
-                      {issue.description}
-                    </Typography>
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>
-                    <form
-                      onSubmit={this.handleSubmit}
-                      noValidate
-                      autoComplete="off"
-                    >
-                      <TextField
-                        style={styles.tfield}
-                        id="title"
-                        label="Title"
-                        margin="normal"
-                        defaultValue={issue.title}
-                      />
-                      <TextField
-                        style={styles.tfield}
-                        id="assignee"
-                        label="Assignee"
-                        defaultValue={issue.assignee}
-                        margin="normal"
-                      />
-                      <TextField
-                        style={styles.tfield}
-                        id="status"
-                        label="Satus"
-                        defaultValue={issue.status}
-                        margin="normal"
-                      />
-                      <TextField
-                        style={styles.tfield}
-                        id="description"
-                        label="Description"
-                        defaultValue={issue.description}
-                        margin="normal"
-                      />
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        style={styles.button}
-                      >
-                        Update
-                      </Button>
-                      <Button
-                        onClick={() => this.handleClick(issue.title)}
-                        variant="contained"
-                        style={styles.button}
-                      >
-                        Delete
-                      </Button>
-                    </form>
-                  </ExpansionPanelDetails>
-                </ExpansionPanel>
-              );
+              return this.outputExpansion(issue);
             } else if (
               this.state.assignee.toLowerCase() ===
                 issue.assignee.toLowerCase() &&
               this.state.status.toLowerCase() === issue.status.toLowerCase()
             ) {
-              return (
-                <ExpansionPanel
-                  id="panel"
-                  style={styles.panel}
-                  key={issue.title}
-                >
-                  <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-                    <Typography>
-                      {issue.title} - {issue.status} - {issue.assignee} -
-                      {issue.description}
-                    </Typography>
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>
-                    <form
-                      onSubmit={this.handleSubmit}
-                      noValidate
-                      autoComplete="off"
-                    >
-                      <TextField
-                        style={styles.tfield}
-                        id="title"
-                        label="Title"
-                        margin="normal"
-                        defaultValue={issue.title}
-                      />
-                      <TextField
-                        style={styles.tfield}
-                        id="assignee"
-                        label="Assignee"
-                        defaultValue={issue.assignee}
-                        margin="normal"
-                      />
-                      <TextField
-                        style={styles.tfield}
-                        id="status"
-                        label="Satus"
-                        defaultValue={issue.status}
-                        margin="normal"
-                      />
-                      <TextField
-                        style={styles.tfield}
-                        id="description"
-                        label="Description"
-                        defaultValue={issue.description}
-                        margin="normal"
-                      />
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        style={styles.button}
-                      >
-                        Update
-                      </Button>
-                      <Button
-                        onClick={() => this.handleClick(issue.title)}
-                        variant="contained"
-                        style={styles.button}
-                      >
-                        Delete
-                      </Button>
-                    </form>
-                  </ExpansionPanelDetails>
-                </ExpansionPanel>
-              );
+              return this.outputExpansion(issue);
             }
           })}
         </div>
