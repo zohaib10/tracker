@@ -75,6 +75,9 @@ const rootReducer = (state = initState, action) => {
       issues: newI,
       assignee: newA
     };
+  } else if (action.type === 'ADD_ISSUE_ERR') {
+    console.log('ADD_ISSUE_ERR', action.err);
+    return state;
   }
 
   return state;
