@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+
+import { firestoreConnect } from 'react-redux-firebase';
 
 import { deleteIssue, updateIssue } from '../actions/showIssuesActions';
 
@@ -174,9 +177,14 @@ class Show extends Component {
 }
 
 const mapStateToProps = state => {
+  const issues = state.firestore.ordered
+    ? state.firestore.ordered.issues
+    : null;
+  //console.log(state);
+  //console.log(issues);
   return {
-    issues: state.issues,
-    assignee: state.assignee
+    issues: issues,
+    assignee: state.show.assignee
   };
 };
 
@@ -187,7 +195,10 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  firestoreConnect([{ collection: 'issues' }])
 )(Show);
